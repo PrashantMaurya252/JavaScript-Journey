@@ -1,0 +1,1 @@
+'use strict'; // we can use this at top of programme
