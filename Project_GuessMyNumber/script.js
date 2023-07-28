@@ -55,11 +55,11 @@ document.querySelector('.check-btn').addEventListener('click',function(){
 let again=document.querySelector('#again-btn').addEventListener('click',function(){
     score=20
     secretNumber=Math.trunc(Math.random()*20)+1;
-    document.querySelector('.guess').value=''
     document.querySelector('#score').textContent=score
+    document.querySelector('.guess').value=''
    
     document.querySelector('.guessing-heading').textContent="Start Guessing"
-    document.querySelector('user-number').textContent= '?'
+    document.querySelector('.user-number').textContent= '?'
     document.querySelector('body').style.backgroundColor='green'
     document.querySelector('.user-number').style.width='100px'
     
