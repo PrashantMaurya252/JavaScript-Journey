@@ -1,2 +1,2 @@
 
-    return function(value){
+    const perGroup=n/3;
