@@ -26,7 +26,7 @@ const account2 = {
     interestRate: 1,
     pin: 4444,
   };
-  const accounts=[account1,account2,account3,account3]
+  const accounts=[account1,account2,account3,account4]
 
   const labelWelcome=document.querySelector('.welcome');
   const labelDate=document.querySelector('.date');
@@ -64,14 +64,30 @@ const account2 = {
       <div class="movements__type movements__type--${type}">${i+1} ${type}</div>
       <div class="movements__value">${mov}</div>
     </div> `;
-    console.log(type);
-    console.log(i+1);
-    console.log(mov)
       
     containerMovements.insertAdjacentHTML('afterbegin',html);
     });
   };
   displayMovements(account1.movements);
-  console.log(containerMovements.innerHTML)
-  console.log(displayMovements(account1.movements))
-  console.log(account1.movements)
+
+
+  // Entering User name -each word first letter in lower case
+
+  const creatingUserName=function(accs){
+    accs.forEach(function(acc){
+       acc.userName=acc.owner.toLowerCase().split(' ').map(name=>name[0]).join('');
+    });
+
+  };
+  creatingUserName(accounts);
+
+// displaying Total Amount
+
+const calcDisplayAmount=function(movements){
+  const balance=movements.reduce((acc,curr)=>acc+curr,0);  
+  labelBallence.textContent=`${balance}€`;
+}
+
+calcDisplayAmount(account1.movements)
+  
+  
