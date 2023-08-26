@@ -30,7 +30,7 @@ const account2 = {
 
   const labelWelcome=document.querySelector('.welcome');
   const labelDate=document.querySelector('.date');
-  const labelBallence=document.querySelector('.balance_value');
+  const labelBallence=document.querySelector('.balance__value');
   const labelSumIn=document.querySelector('.summary__value--in');
   const labelSumOut=document.querySelector('.summary__value--out');
   const labelSumInterest=document.querySelector('.summary__value--interest');
@@ -62,7 +62,7 @@ const account2 = {
       const html=`
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${i+1} ${type}</div>
-      <div class="movements__value">${mov}</div>
+      <div class="movements__value">${mov}€</div>
     </div> `;
       
     containerMovements.insertAdjacentHTML('afterbegin',html);
@@ -84,10 +84,38 @@ const account2 = {
 // displaying Total Amount
 
 const calcDisplayAmount=function(movements){
-  const balance=movements.reduce((acc,curr)=>acc+curr,0);  
+  const balance=movements.reduce((acc,curr)=>acc+curr,0);
   labelBallence.textContent=`${balance}€`;
+ 
 }
 
 calcDisplayAmount(account1.movements)
+
+//displaying summary
+
+const calcDisplaySummary=function(movements){
+  const income=movements.filter(mov=>mov>0).reduce((acc,mov)=>acc+mov,0);
+  labelSumIn.textContent=`${income}€`;
+  const spending=movements.filter(mov=>mov<0).reduce((acc,mov)=>Math.abs(acc)+Math.abs(mov),0);
+  labelSumOut.textContent=`${spending}`;
+  const interest=movements.filter(mov=>mov>0).map(mov=>mov*1.2/100).reduce((acc,mov)=>acc+mov,0);
+  labelSumInterest.textContent=`${interest}€`
+
+}
+calcDisplaySummary(account1.movements)
+
+// Login Implementation
+let currentAccount;
+
+btnLogin.addEventListener('click',function(e){
+  //prevent form from submitting
+  e.preventDefault();
+  currentAccount=accounts.find(acc=>acc.userName===inputLoginUsername.value);
+  if(currentAccount?.pin===Number(inputLoginPin.value)){
+    
+  }
+  console.log(currentAccount)
+ 
+})
   
   
